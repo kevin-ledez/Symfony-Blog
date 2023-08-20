@@ -40,6 +40,9 @@ class Article
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
 
+    #[ORM\ManyToOne]
+    private ?Media $featuredImage = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -176,6 +179,18 @@ class Article
                 $comment->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFeaturedImage(): ?Media
+    {
+        return $this->featuredImage;
+    }
+
+    public function setFeaturedImage(?Media $featuredImage): static
+    {
+        $this->featuredImage = $featuredImage;
 
         return $this;
     }
