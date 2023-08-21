@@ -29,11 +29,11 @@ class Article implements TimestampedInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $featuredText = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createdAt = null;
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $createdAt;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $updatedAt = null;
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private $updatedAt;
 
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'articles')]
     private Collection $categories;
@@ -48,6 +48,7 @@ class Article implements TimestampedInterface
     {
         $this->categories = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int

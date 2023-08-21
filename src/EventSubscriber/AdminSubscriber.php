@@ -9,10 +9,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class EventSubscriber implements EventSubscriberInterface {
 
-    public static function getSubscribedEvents(): array {
+    public static function getSubscribedEvents(): array
+    {
         return [
             BeforeEntityPersistedEvent::class => ['setEntityCreatedAt'],
-            BeforeEntityUpdatedEvent::class => ['setEntityUpdatedAt']
+            BeforeEntityUpdatedEvent::class => ['setEntityUpdatedAt'],
         ];
     }
 
@@ -26,7 +27,7 @@ class EventSubscriber implements EventSubscriberInterface {
         $entity->setCreatedAt(new \DateTime());
     }
 
-    public function setEntityUpdatedAt(BeforeEntityPersistedEvent $event): void {
+    public function setEntityUpdatedAt(BeforeEntityUpdatedEvent $event): void {
         $entity = $event->getEntityInstance();
 
         if (!$entity instanceof TimestampedInterface) {

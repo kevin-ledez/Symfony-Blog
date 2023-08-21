@@ -20,18 +20,15 @@ class ArticleCrudController extends AbstractCrudController
     {
         yield TextField::new('title');
 
-        yield SlugField::new('slug')
-            ->setTargetFieldName('title');
+        yield SlugField::new('slug')->setTargetFieldName('title');
 
         yield TextEditorField::new('content');
 
         yield TextField::new('featuredText');
 
-        yield DateTimeField::new('createdAt')
-            ->hideOnForm();
-        
-            yield DateTimeField::new('updatedAt')
-            ->hideOnForm();
+        yield DateTimeField::new('createdAt')->hideOnForm();
+
+        yield DateTimeField::new('updatedAt')->hideOnForm();
     }
 
 }
