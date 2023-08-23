@@ -4,6 +4,7 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>NaliusBlog - {% block title %}{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {% block stylesheets %}
@@ -15,28 +16,32 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="py-2 border-bottom">
-            <div class="container d-flex flex-wrap">
-                <div class="dropdown">
-                    <a class="nav nav-link dropdown-toggle text-dark" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Mon Blog
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{{ path('admin') }}">Tableau de bord</a></li>
-                        <li><a class="dropdown-item" href="{{ ea_index('MenuCrudController') }}">Menus</a></li>
-                    </ul>
+        {% if is_granted('ROLE_AUTHOR') %}
+            <nav class="py-2 border-bottom">
+                <div class="container d-flex flex-wrap">
+                    <div class="dropdown">
+                        <a class="nav nav-link dropdown-toggle text-dark" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Mon Blog
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ path('admin') }}">Tableau de bord</a></li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li><a class="dropdown-item" href="{{ ea_index('MenuCrudController') }}">Menus</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <a class="nav nav-link dropdown-toggle text-dark" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Ajouter
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Article</a></li>
+                            <li><a class="dropdown-item" href="#">Page</a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="dropdown">
-                    <a class="nav nav-link dropdown-toggle text-dark" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Ajouter
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Article</a></li>
-                        <li><a class="dropdown-item" href="#">Page</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+            </nav>
+        {% endif %}
 
         <div class="container">
             <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
