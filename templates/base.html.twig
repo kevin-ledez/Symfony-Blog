@@ -79,7 +79,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="#">Mon profil</a>
+                                    <a class="dropdown-item" href="{{ path('app_profile', { username: app.user.username }) }}">Mon profil</a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item" href="{{ path('app_logout') }}">Déconnexion</a>
